@@ -51,9 +51,30 @@ sudo mv /root/setup/req.txt /webapps/mapchi/req.txt
 sudo chown mapchiuser:webapps /webapps/mapchi/req.txt
 
 # Install dependencies
-sudo -u mapchiuser pip install --upgrade filelock
 sudo -u mapchiuser pip install -r /webapps/mapchi/req.txt
 sudo -u mapchiuser pip install psycopg2-binary
+
+# Copy settings file to new location
+sudo mv /root/setup/settingsprod.py /webapps/mapchi/environment_3_8_2/mapchecrm_django/mapchecrm_django/
+
+# Install and setup Gunicorn
+sudo -u mapchiuser pip install gunicorn
+sudo mkdir /webapps/mapchi/environment_3_8_2/run
+sudo mv /root/setup/gunicorn_start /webapps/mapchi/environment_3_8_2/bin/
+sudo chmod +x /webapps/mapchi/environment_3_8_2/bin/gunicorn_start
+
+# Install and setup Supervisor
+sudo apt install supervisor
+sudo mkdir /webapps/mapchi/environment_3_8_2/log
+sudo chown -R mapchiuser:webapps /webapps/mapchi/environment_3_8_2/
+sudo mv /root/setup/mapchecrm_django.conf /etc/supervisor/conf.d/
+supervisorctl reread
+supervisorctl update
+
+# Remove old files
+rm -fr /webapps/mapchi/environment_3_8_2/mapchecrm-main
+rm -fr /webapps/mapchi/req.txt
+rm -fr /root/setup_mapchi.sh
 
 # Output completion message
 echo "Mapchi setup completed successfully."
