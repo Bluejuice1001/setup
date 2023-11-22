@@ -44,7 +44,7 @@ mv mapchecrm_django/..
 rm -fr mapchecrm-main
 
 # Install dependencies
-sudo -u mapchiuser pip install -r mapchicrm_django/db/req.txt
+sudo -u mapchiuser pip install -r setup/req.txt
 sudo -u mapchiuser pip install psycopg2-binary
 
 # Output completion message
