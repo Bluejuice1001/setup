@@ -25,8 +25,8 @@ sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE mapchi TO mapchiuser;
 #sudo systemctl start nginx
 
 # Install virtualenv for Mapchi
-sudo -H pip3 install --upgrade pip
-sudo -H pip3 install virtualenv
+sudo -H pip install --upgrade pip
+sudo -H pip install virtualenv
 
 # Create group and user for the Mapchi project
 sudo mkdir -p /webapps/mapchi
@@ -44,7 +44,7 @@ mv mapchecrm_django/..
 rm -fr mapchecrm-main
 
 # Install dependencies
-sudo -u mapchiuser pip install -r setup/req.txt
+sudo -u mapchiuser pip install -r /root/setup/req.txt
 sudo -u mapchiuser pip install psycopg2-binary
 
 # Output completion message
