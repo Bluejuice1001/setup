@@ -21,8 +21,8 @@ sudo -u postgres psql -c "ALTER ROLE mapchiuser SET timezone TO 'UTC';"
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE mapchi TO mapchiuser;"
 
 # Enable and start Nginx
-sudo systemctl enable nginx
-sudo systemctl start nginx
+#sudo systemctl enable nginx
+#sudo systemctl start nginx
 
 # Install virtualenv for Mapchi
 sudo -H pip3 install --upgrade pip
