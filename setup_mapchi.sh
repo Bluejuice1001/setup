@@ -66,7 +66,7 @@ sudo chmod +x /webapps/mapchi/environment_3_8_2/bin/gunicorn_start
 # Install and setup Supervisor
 sudo apt install supervisor
 sudo mkdir /webapps/mapchi/environment_3_8_2/logs
-sudo touch /webapps/mapchi/environment_3_8_2/supervisor.log
+sudo touch /webapps/mapchi/environment_3_8_2/logs/supervisor.log
 sudo chown -R mapchiuser:webapps /webapps/mapchi/environment_3_8_2/
 sudo mv /root/setup/mapchecrm_django.conf /etc/supervisor/conf.d/
 supervisorctl reread
