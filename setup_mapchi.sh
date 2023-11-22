@@ -60,12 +60,13 @@ sudo mv /root/setup/settingsprod.py /webapps/mapchi/environment_3_8_2/mapchecrm_
 # Install and setup Gunicorn
 sudo -u mapchiuser pip install gunicorn
 sudo mkdir /webapps/mapchi/environment_3_8_2/run
-sudo mv /root/setup/gunicorn_start /webapps/mapchi/environment_3_8_2/bin/
+sudo mv /root/setup/gunicorn_start /webapps/mapchi/environment_3_8_2/bin/gunicorn_start
 sudo chmod +x /webapps/mapchi/environment_3_8_2/bin/gunicorn_start
 
 # Install and setup Supervisor
 sudo apt install supervisor
-sudo mkdir /webapps/mapchi/environment_3_8_2/log
+sudo mkdir /webapps/mapchi/environment_3_8_2/logs
+sudo touch /webapps/mapchi/environment_3_8_2/supervisor.log
 sudo chown -R mapchiuser:webapps /webapps/mapchi/environment_3_8_2/
 sudo mv /root/setup/mapchecrm_django.conf /etc/supervisor/conf.d/
 supervisorctl reread
