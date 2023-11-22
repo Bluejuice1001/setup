@@ -32,19 +32,27 @@ sudo -H pip install virtualenv
 sudo mkdir -p /webapps/mapchi
 sudo groupadd --system webapps
 sudo useradd --system --gid webapps --shell /bin/bash --home /webapps/mapchi mapchiuser
-
+sudo chown -R mapchiuser:webapps /webapps/mapchi/
 # Create Mapchi environment
 cd /webapps/mapchi
 sudo -u mapchiuser virtualenv environment_3_8_2
 source environment_3_8_2/bin/activate
 cd environment_3_8_2/
+rm -fr mapchecrm-main
 sudo -u mapchiuser git clone 'https://github.com/Bluejuice1001/mapchecrm-main.git'
 cd mapchecrm-main
-mv mapchecrm_django/..
+rm -fr /webapps/mapchi/environment_3_8_2/mapchecrm_django
+mv mapchecrm_django/ /webapps/mapchi/environment_3_8_2/
 rm -fr mapchecrm-main
 
+
+# Move file req.txt to be accessible by mapchiuser
+sudo mv /root/setup/req.txt /webapps/mapchi/req.txt
+sudo chown mapchiuser:webapps /webapps/mapchi/req.txt
+
 # Install dependencies
-sudo -u mapchiuser pip install -r /root/setup/req.txt
+sudo -u mapchiuser pip install --upgrade filelock
+sudo -u mapchiuser pip install -r /webapps/mapchi/req.txt
 sudo -u mapchiuser pip install psycopg2-binary
 
 # Output completion message
