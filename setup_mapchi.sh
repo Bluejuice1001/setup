@@ -51,14 +51,16 @@ sudo mv /root/setup/req.txt /webapps/mapchi/req.txt
 sudo chown mapchiuser:webapps /webapps/mapchi/req.txt
 
 # Install dependencies
-sudo -u mapchiuser pip install -r /webapps/mapchi/req.txt
-sudo -u mapchiuser pip install psycopg2-binary
+#sudo -u mapchiuser pip install -r /webapps/mapchi/req.txt
+#sudo -u mapchiuser pip install psycopg2-binary
+pip install -r /webapps/mapchi/req.txt
+pip install psycopg2-binary
 
 # Copy settings file to new location
 sudo mv /root/setup/settingsprod.py /webapps/mapchi/environment_3_8_2/mapchecrm_django/mapchecrm_django/
 
 # Install and setup Gunicorn
-sudo -u mapchiuser pip install gunicorn
+pip install gunicorn
 sudo mkdir /webapps/mapchi/environment_3_8_2/run
 sudo mv /root/setup/gunicorn_start /webapps/mapchi/environment_3_8_2/bin/gunicorn_start
 sudo chmod +x /webapps/mapchi/environment_3_8_2/bin/gunicorn_start
