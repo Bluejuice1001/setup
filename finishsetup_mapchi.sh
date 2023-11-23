@@ -12,6 +12,8 @@ sudo mv /root/setup/mapchi.com /etc/nginx/sites-available/
 sudo mv /root/setup/api.mapchi.com /etc/nginx/sites-available/
 sudo mv /root/setup/staging.mapchi.com /etc/nginx/sites-available/
 cd /etc/nginx/sites-enabled
+rm mapchisetup.com
+rm api.mapchisetup.com
 rm www.mapchi.com
 ln -s ../sites-available/www.mapchi.com .
 rm mapchi.com
