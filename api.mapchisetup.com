@@ -3,7 +3,7 @@ upstream mapchecrm_app_server {
 }
 
 server {
-    listen 80;
+    listen 8500;
     server_name 146.190.224.201;
     return 301 http://146.190.224.201$request_uri;
 }
