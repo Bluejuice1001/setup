@@ -74,6 +74,39 @@ sudo mv /root/setup/mapchecrm_django.conf /etc/supervisor/conf.d/
 supervisorctl reread
 supervisorctl update
 
+# Get SSL certificate
+#sudo certbot -d mapchi.com
+#sudo certbot -d api.mapchi.com
+#sudo certbot -d staging.mapchi.com
+#sudo certbot -d www.mapchi.com
+
+# Setup Nginx
+sudo mv /root/setup/www.mapchi.com /etc/nginx/sites-available/
+sudo mv /root/setup/mapchi.com /etc/nginx/sites-available/
+sudo mv /root/setup/api.mapchi.com /etc/nginx/sites-available/
+sudo mv /root/setup/staging.mapchi.com /etc/nginx/sites-available/
+cd /etc/nginx/sites-enabled
+ln -s ../sites-available/www.mapchi.com .
+ln -s ../sites-available/mapchi.com .
+ln -s ../sites-available/api.mapchi.com .
+ln -s ../sites-available/staging.mapchi.com .
+
+# Restart some services
+service nginx restart
+supervisorctl restart mapchicrm_django
+service nginx restart
+
+# Change default settings.py to settingsprod.py for manage.py
+cd /webapps/mapchi/environment_3_8_2/mapchecrm_django
+python manage.py makemigrations --settings mapchecrm_django.settingsprod
+python manage.py migrate --settings mapchecrm_django.settingsprod
+supervisorctl restart mapchicrm_django
+
+# Add compiled website front (First one live website, second one staging website)
+#sudo mv /root/dist /webapps/mapchi/dist
+#sudo mv /root /webapps/mapchi/staging_dist
+
+
 # Remove old files
 rm -fr /webapps/mapchi/environment_3_8_2/mapchecrm-main
 rm -fr /webapps/mapchi/req.txt
@@ -81,3 +114,6 @@ rm -fr /root/setup_mapchi.sh
 
 # Output completion message
 echo "Mapchi setup completed successfully."
+
+# Reboot server
+#sudo reboot now
