@@ -92,6 +92,7 @@ service nginx restart
 deactivate
 source /webapps/mapchi/environment_3_8_2/bin/activate
 cd /webapps/mapchi/environment_3_8_2/mapchecrm_django
+sudo mkdir /webapps/mapchi/environment_3_8_2/mapchecrm_django/static
 python manage.py makemigrations --settings mapchecrm_django.settingsprod
 python manage.py migrate --settings mapchecrm_django.settingsprod
 supervisorctl restart mapchecrm_django
@@ -101,6 +102,8 @@ deactivate
 source /webapps/mapchi/environment_3_8_2/bin/activate
 cd /webapps/mapchi/environment_3_8_2/mapchecrm_django
 python manage.py collectstatic
+sudo chown -R mapchiuser:webapps /webapps/mapchi/environment_3_8_2/
+
 
 # Add compiled website front (First one live website, second one staging website)
 sudo mv /root/setup/dist /webapps/mapchi/dist
