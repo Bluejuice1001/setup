@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iFrame Integrate</title>
+</head>
+
+<body>
+    <script type="module">
+        // Get the mapchi-key parameter from the URL
+        sessionStorage.removeItem('parentHostname')
+        sessionStorage.removeItem('parentOrigin')
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const mapchiKey = urlParams.get('mapchi-key');
+        const parentHostname = new URL(document.referrer).hostname
+        const parentOrigin = new URL(document.referrer).origin;
+
+        sessionStorage.setItem('parentHostname', parentHostname)
+        sessionStorage.setItem('parentOrigin', parentOrigin)
+        // Check if mapchi-key is available and load the script dynamically
+        if (mapchiKey) {
+            const script = document.createElement('script');
+            script.type = "module";
+            script.src = `https://mapchi.com/loaderiframe.js?mapchi-key=${mapchiKey}`;
+            document.body.appendChild(script);
+        } else {
+            console.error('Error: mapchi-key parameter is missing in the URL.');
+        }
+    </script>
+</body>
+
+</html>
+

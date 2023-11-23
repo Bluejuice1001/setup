@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Widget Admin Intergate</title>
+</head>
+
+<body>
+    <script type="module">
+        sessionStorage.removeItem('parentWidgetHostname')
+        sessionStorage.removeItem('parentWidgetOrigin')
+    
+        // Get the mapchi-key parameter from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const mapchiKey = urlParams.get('mapchi-key');
+        const parentWidgetHostname = new URL(document.referrer).hostname
+        const parentWidgetOrigin = new URL(document.referrer).origin;
+
+        sessionStorage.setItem('parentWidgetHostname', parentWidgetHostname)
+        sessionStorage.setItem('parentWidgetOrigin', parentWidgetOrigin)
+        // Check if mapchi-key is available and load the script dynamically
+        if (mapchiKey) {
+            const script = document.createElement('script');
+            script.type = "module";
+            script.src = `https://mapchi.com/loaderwidget.js?mapchi-key=${mapchiKey}`;
+            document.body.appendChild(script);
+        } else {
+            console.error('Error: mapchi-key parameter is missing in the URL.');
+        }
+    </script>
+</body>
+
+</html>
