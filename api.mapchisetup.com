@@ -6,18 +6,11 @@ server {
     listen 8500;
     server_name 146.190.224.201;
     return 301 http://146.190.224.201$request_uri;
-}
-
-
-server {
-    listen 8500;
-    server_name 146.190.224.201;
 
     client_max_body_size 4G;
 
     access_log /webapps/mapchi/environment_3_8_2/logs/nginx-django-access.log;
     error_log /webapps/mapchi/environment_3_8_2/logs/nginx-django-error.log;
-
 
     location /static/ {
         alias /webapps/mapchi/environment_3_8_2/mapchecrm_django/static/;
@@ -29,9 +22,7 @@ server {
 
     location / {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-
         proxy_set_header Host $http_host;
-
         proxy_redirect off;
 
         if (!-f $request_filename) {
