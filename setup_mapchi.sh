@@ -75,10 +75,10 @@ supervisorctl reread
 supervisorctl update
 
 # Get SSL certificate
-#sudo certbot -d mapchi.com
-#sudo certbot -d api.mapchi.com
-#sudo certbot -d staging.mapchi.com
-#sudo certbot -d www.mapchi.com
+sudo certbot -d mapchi.com
+sudo certbot -d api.mapchi.com
+sudo certbot -d staging.mapchi.com
+sudo certbot -d www.mapchi.com
 
 # Setup Nginx
 sudo mv /root/setup/www.mapchi.com /etc/nginx/sites-available/
@@ -104,8 +104,8 @@ supervisorctl restart mapchicrm_django
 
 # Install Static files Django Admin
 deactivate
-source webapps/mapchi/environment_3_8_2/bin/activate
-cd /webapps/mapchi/environment_3_8_2/mapchicrm_django
+source /webapps/mapchi/environment_3_8_2/bin/activate
+cd /webapps/mapchi/environment_3_8_2/mapchecrm_django
 python manage.py collectstatic
 
 # Add compiled website front (First one live website, second one staging website)
