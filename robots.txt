@@ -3,3 +3,5 @@ Disallow: /widget.html
 Disallow: /iframe.html
 Disallow: /loader.js
 Disallow: /loaderiframe.js
+Disallow: /loaderiframetest.js
+Disallow: /loaderwidget.js
