@@ -86,21 +86,27 @@ sudo mv /root/setup/mapchi.com /etc/nginx/sites-available/
 sudo mv /root/setup/api.mapchi.com /etc/nginx/sites-available/
 sudo mv /root/setup/staging.mapchi.com /etc/nginx/sites-available/
 cd /etc/nginx/sites-enabled
+rm www.mapchi.com
 ln -s ../sites-available/www.mapchi.com .
+rm mapchi.com
 ln -s ../sites-available/mapchi.com .
+rm api.mapchi.com
 ln -s ../sites-available/api.mapchi.com .
+rm staging.mapchi.com
 ln -s ../sites-available/staging.mapchi.com .
 
 # Restart some services
 service nginx restart
-supervisorctl restart mapchicrm_django
+supervisorctl restart mapchecrm_django
 service nginx restart
 
 # Change default settings.py to settingsprod.py, adds database columns for new changes
+deactivate
+source /webapps/mapchi/environment_3_8_2/bin/activate
 cd /webapps/mapchi/environment_3_8_2/mapchecrm_django
 python manage.py makemigrations --settings mapchecrm_django.settingsprod
 python manage.py migrate --settings mapchecrm_django.settingsprod
-supervisorctl restart mapchicrm_django
+supervisorctl restart mapchecrm_django
 
 # Install Static files Django Admin
 deactivate
