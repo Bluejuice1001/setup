@@ -102,6 +102,12 @@ python manage.py makemigrations --settings mapchecrm_django.settingsprod
 python manage.py migrate --settings mapchecrm_django.settingsprod
 supervisorctl restart mapchicrm_django
 
+# Install Static files Django Admin
+deactivate
+source webapps/mapchi/environment_3_8_2/bin/activate
+cd /webapps/mapchi/environment_3_8_2/mapchicrm_django
+python manage.py collectstatic
+
 # Add compiled website front (First one live website, second one staging website)
 sudo mv /root/setup/dist /webapps/mapchi/dist
 sudo mkdir /webapps/mapchi/dist/.well-known
