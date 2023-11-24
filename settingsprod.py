@@ -40,6 +40,7 @@ ALLOWED_HOSTS = [
     'staging.mapchi.com',
     'prometheus1001.myqnapcloud.com',
     '143.110.174.196',
+    '146.190.224.201',
 ]
 
 CORS_ALLOW_HEADERS = [
