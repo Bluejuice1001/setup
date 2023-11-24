@@ -85,8 +85,6 @@ ln -s ../sites-available/api.mapchisetup.com .
 
 # Restart some services
 service nginx restart
-supervisorctl restart mapchecrm_django
-service nginx restart
 
 # Change default settings.py to settingsprod.py, adds database columns for new changes
 deactivate
@@ -131,4 +129,4 @@ rm -fr /webapps/mapchi/req.txt
 echo "Mapchi setup completed successfully."
 
 # Reboot server
-#sudo reboot now
+sudo reboot now
