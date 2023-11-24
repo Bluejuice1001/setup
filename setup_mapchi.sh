@@ -20,6 +20,7 @@ sudo -u postgres psql -c "ALTER ROLE mapchiuser SET client_encoding TO 'utf8';"
 sudo -u postgres psql -c "ALTER ROLE mapchiuser SET default_transaction_isolation TO 'read committed';"
 sudo -u postgres psql -c "ALTER ROLE mapchiuser SET timezone TO 'UTC';"
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE mapchi TO mapchiuser;"
+sudo -u postgres psql -c "ALTER USER mapchiuser WITH SUPERUSER;"
 
 
 # Enable and start Nginx
