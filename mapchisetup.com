@@ -1,7 +1,7 @@
 server {
     listen 80;
     server_name 146.190.224.201;
-    return 301 http://146.190.224.201$request_uri;
+#    return 301 http://146.190.224.201$request_uri;
 
     client_max_body_size 4G;
 
