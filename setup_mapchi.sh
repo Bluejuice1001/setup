@@ -121,6 +121,11 @@ sudo mv /root/setup/sitemap.xml /webapps/mapchi/dist/
 sudo mv /root/setup/robots.txt /webapps/mapchi/dist/
 #sudo mv /root /webapps/mapchi/staging_dist
 
+# Migrate data from sqlite to postgres
+pgloader sqlite:///webapps/mapchi/environment_3_8_2/mapchecrm_django/db.sqlite3 "postgresql://mapchiuser:mapchipassword@localhost:5432/mapchi"
+
+# Output completion message
+echo "DB migration successfull"
 
 # Remove old files
 rm -fr /webapps/mapchi/environment_3_8_2/mapchecrm-main
