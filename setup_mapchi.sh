@@ -93,15 +93,16 @@ deactivate
 source /webapps/mapchi/environment_3_8_2/bin/activate
 cd /webapps/mapchi/environment_3_8_2/mapchecrm_django
 sudo mkdir /webapps/mapchi/environment_3_8_2/mapchecrm_django/static
-python manage.py makemigrations --settings mapchecrm_django.settingsprod
-python manage.py migrate --settings mapchecrm_django.settingsprod
+#python manage.py makemigrations --settings mapchecrm_django.settingsprod
+#python manage.py migrate --settings mapchecrm_django.settingsprod
+python manage.py collectstatic --settings=mapchecrm_django.settingsprod
 supervisorctl restart mapchecrm_django
 
 # Install Static files Django Admin
-deactivate
-source /webapps/mapchi/environment_3_8_2/bin/activate
-cd /webapps/mapchi/environment_3_8_2/mapchecrm_django
-python manage.py collectstatic
+#deactivate
+#source /webapps/mapchi/environment_3_8_2/bin/activate
+#cd /webapps/mapchi/environment_3_8_2/mapchecrm_django
+#python manage.py collectstatic
 sudo chown -R mapchiuser:webapps /webapps/mapchi/environment_3_8_2/
 
 
