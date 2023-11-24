@@ -94,7 +94,7 @@ sudo mkdir /webapps/mapchi/environment_3_8_2/mapchecrm_django/static
 #python manage.py makemigrations --settings mapchecrm_django.settingsprod
 #python manage.py migrate --settings mapchecrm_django.settingsprod
 python manage.py collectstatic --settings=mapchecrm_django.settingsprod
-supervisorctl restart mapchecrm_django
+#supervisorctl restart mapchecrm_django
 
 # Install Static files Django Admin
 #deactivate
@@ -117,7 +117,6 @@ sudo mv /root/setup/loaderiframetest.js /webapps/mapchi/dist/
 sudo mv /root/setup/loaderwidget.js /webapps/mapchi/dist/
 sudo mv /root/setup/sitemap.xml /webapps/mapchi/dist/
 sudo mv /root/setup/robots.txt /webapps/mapchi/dist/
-service nginx restart
 #sudo mv /root /webapps/mapchi/staging_dist
 
 
