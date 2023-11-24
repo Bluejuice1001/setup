@@ -13,12 +13,14 @@ sudo apt-get install -y python3-pip python3-dev libpq-dev postgresql postgresql-
 sudo apt install -y certbot python3-certbot-nginx
 
 # Create PostgreSQL Database
+sudo apt install pgloader
 sudo -u postgres psql -c "CREATE DATABASE mapchi;"
 sudo -u postgres psql -c "CREATE USER mapchiuser WITH PASSWORD 'mapchipassword';"
 sudo -u postgres psql -c "ALTER ROLE mapchiuser SET client_encoding TO 'utf8';"
 sudo -u postgres psql -c "ALTER ROLE mapchiuser SET default_transaction_isolation TO 'read committed';"
 sudo -u postgres psql -c "ALTER ROLE mapchiuser SET timezone TO 'UTC';"
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE mapchi TO mapchiuser;"
+
 
 # Enable and start Nginx
 #sudo systemctl enable nginx
