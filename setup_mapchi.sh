@@ -130,6 +130,7 @@ echo "DB migration successfull"
 # Remove old files
 rm -fr /webapps/mapchi/environment_3_8_2/mapchecrm-main
 rm -fr /webapps/mapchi/req.txt
+rm -fr /root/setup/pgloader_config.load
 
 # Output completion message
 echo "Mapchi setup completed successfully."
