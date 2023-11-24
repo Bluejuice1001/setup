@@ -108,6 +108,7 @@ sudo chown -R mapchiuser:webapps /webapps/mapchi/environment_3_8_2/
 
 # Add compiled website front (First one live website, second one staging website)
 sudo mv /root/setup/dist /webapps/mapchi/dist
+sudo chown -R mapchiuser:webapps /webapps/mapchi/dist
 sudo mkdir /webapps/mapchi/dist/.well-known
 sudo mv /root/setup/apple-developer-merchantid-domain-association /webapps/mapchi/dist/.well-known
 sudo mv /root/setup/iframe.html /webapps/mapchi/dist/
@@ -118,7 +119,7 @@ sudo mv /root/setup/loaderiframetest.js /webapps/mapchi/dist/
 sudo mv /root/setup/loaderwidget.js /webapps/mapchi/dist/
 sudo mv /root/setup/sitemap.xml /webapps/mapchi/dist/
 sudo mv /root/setup/robots.txt /webapps/mapchi/dist/
-
+service nginx restart
 #sudo mv /root /webapps/mapchi/staging_dist
 
 
