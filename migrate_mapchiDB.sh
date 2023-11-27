@@ -7,8 +7,6 @@ backup_file="/webapps/mapchi/DB-Backup/backup_file_${current_date}.dump"
 PGPASSWORD=mapchipassword pg_dump -h localhost -U mapchiuser -d mapchi -Fc -f "${backup_file}"
 
 # Copy new code
-source environment_3_8_2/bin/activate
-cd environment_3_8_2/
 rm -fr mapchecrm-main
 sudo -u mapchiuser git clone 'https://github.com/Bluejuice1001/mapchecrm-main.git'
 cd mapchecrm-main
@@ -28,6 +26,7 @@ pip install -r /webapps/mapchi/req.txt
 sudo mv /root/setup/settingsprod.py /webapps/mapchi/environment_3_8_2/mapchecrm_django/mapchecrm_django/
 
 # Add new tables to postgres
+source /webapps/mapchi/environment_3_8_2/bin/activate
 cd /webapps/mapchi/environment_3_8_2/mapchecrm_django
 python manage.py makemigrations --settings mapchecrm_django.settingsprod
 python manage.py migrate --settings mapchecrm_django.settingsprod
