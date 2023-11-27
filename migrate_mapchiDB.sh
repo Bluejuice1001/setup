@@ -33,6 +33,22 @@ python manage.py makemigrations --settings mapchecrm_django.settingsprod
 python manage.py migrate --settings mapchecrm_django.settingsprod
 supervisorctl restart mapchecrm_django
 
+# Add compiled website front (First one live website, second one staging website)
+sudo mv /root/setup/dist /webapps/mapchi/dist
+sudo chown -R mapchiuser:webapps /webapps/mapchi/dist
+sudo mkdir /webapps/mapchi/dist/.well-known
+sudo mv /root/setup/apple-developer-merchantid-domain-association /webapps/mapchi/dist/.well-known
+sudo mv /root/setup/iframe.html /webapps/mapchi/dist/
+sudo mv /root/setup/widget.html /webapps/mapchi/dist/
+sudo mv /root/setup/loader.js /webapps/mapchi/dist/
+sudo mv /root/setup/loaderiframe.js /webapps/mapchi/dist/
+sudo mv /root/setup/loaderiframetest.js /webapps/mapchi/dist/
+sudo mv /root/setup/loaderwidget.js /webapps/mapchi/dist/
+sudo mv /root/setup/sitemap.xml /webapps/mapchi/dist/
+sudo mv /root/setup/robots.txt /webapps/mapchi/dist/
+rm -f /webapps/mapchi/staging_dist
+sudo mv /root/dist /webapps/mapchi/staging_dist
+
 # Only if i have to dumb and move data accross
 #python manage.py dumpdata > data.json
 #python manage.py loaddata data.json --settings=mapchecrm_django.settingsprod
