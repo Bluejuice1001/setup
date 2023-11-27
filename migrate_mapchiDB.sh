@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # Add new tables to postgres
+sudo mkdir /webapps/mapchi/DB-Backup
 current_date=$(date +"%Y%m%d_%H%M%S")
-backup_file="/webapps/mapchi/backup_file_${current_date}.dump"
+backup_file="/webapps/mapchi/DB-Backup/backup_file_${current_date}.dump"
 pg_dump -h localhost -U your_username -d your_database_name -Fc -f "${backup_file}"
 #cd /webapps/mapchi/environment_3_8_2/mapchecrm_django
 #python manage.py makemigrations --settings mapchecrm_django.settingsprod
