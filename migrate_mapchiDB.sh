@@ -7,10 +7,12 @@ backup_file="/webapps/mapchi/DB-Backup/backup_file_${current_date}.dump"
 PGPASSWORD=mapchipassword pg_dump -h localhost -U mapchiuser -d mapchi -Fc -f "${backup_file}"
 
 # Add new tables to postgres
-#cd /webapps/mapchi/environment_3_8_2/mapchecrm_django
-#python manage.py makemigrations --settings mapchecrm_django.settingsprod
-#python manage.py migrate --settings mapchecrm_django.settingsprod
-#supervisorctl restart mapchecrm_django
+cd /webapps/mapchi/environment_3_8_2/mapchecrm_django
+python manage.py makemigrations --settings mapchecrm_django.settingsprod
+python manage.py migrate --settings mapchecrm_django.settingsprod
+supervisorctl restart mapchecrm_django
+
+# Only if i have to dumb and move data accross
 #python manage.py dumpdata > data.json
 #python manage.py loaddata data.json --settings=mapchecrm_django.settingsprod
 
