@@ -261,7 +261,7 @@ function restore_specific_version() {
     # Check if the specified version exists
     if [ -f "$backup_directory/$specific_version" ]; then
         # Add your steps to restore with a specific version here
-        # Example: pg_restore -h localhost -U mapchiuser -d mapchi -Fc -c "$backup_directory/$specific_version"
+        PGPASSWORD=mapchipassword pg_restore -h localhost -U mapchiuser -d mapchi -Fc -c "$backup_directory/$specific_version"
         echo "Specific version '$specific_version' restored successfully."
     else
         echo "Error: Backup version '$specific_version' not found. Exiting..."
