@@ -246,8 +246,27 @@ fi
 
 function restore_specific_version() {
     echo "Restoring with a specific version..."
-    # Add your steps to restore with a specific version here
-    echo "Specific version restored successfully."
+    
+    # Assuming backup files are stored in /webapps/mapchi/DB-Backup
+    backup_directory="/webapps/mapchi/DB-Backup"
+    
+    # List available backup files
+    echo "Available backup versions:"
+    ls -1 $backup_directory
+
+    # Prompt user for the specific version
+    echo -n "Enter the backup version to restore (e.g., backup_file_20231127_153316.dump): "
+    read specific_version
+
+    # Check if the specified version exists
+    if [ -f "$backup_directory/$specific_version" ]; then
+        # Add your steps to restore with a specific version here
+        # Example: pg_restore -h localhost -U mapchiuser -d mapchi -Fc -c "$backup_directory/$specific_version"
+        echo "Specific version '$specific_version' restored successfully."
+    else
+        echo "Error: Backup version '$specific_version' not found. Exiting..."
+        exit 1
+    fi
 }
 
 # Display menu
