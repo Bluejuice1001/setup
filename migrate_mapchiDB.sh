@@ -4,7 +4,7 @@
 sudo mkdir /webapps/mapchi/DB-Backup
 current_date=$(date +"%Y%m%d_%H%M%S")
 backup_file="/webapps/mapchi/DB-Backup/backup_file_${current_date}.dump"
-pg_dump -h localhost -U your_username -d your_database_name -Fc -f "${backup_file}"
+pg_dump -h localhost -U mapchiuser -d mapchi -Fc -f "${backup_file}"
 #cd /webapps/mapchi/environment_3_8_2/mapchecrm_django
 #python manage.py makemigrations --settings mapchecrm_django.settingsprod
 #python manage.py migrate --settings mapchecrm_django.settingsprod
