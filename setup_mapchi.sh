@@ -94,9 +94,9 @@ deactivate
 source /webapps/mapchi/environment_3_8_2/bin/activate
 cd /webapps/mapchi/environment_3_8_2/mapchecrm_django
 sudo mkdir /webapps/mapchi/environment_3_8_2/mapchecrm_django/static
-python manage.py makemigrations --settings mapchecrm_django.settingsprod
-python manage.py migrate --settings mapchecrm_django.settingsprod
-python manage.py collectstatic #--settings=mapchecrm_django.settingsprod
+#python manage.py makemigrations --settings mapchecrm_django.settingsprod
+#python manage.py migrate --settings mapchecrm_django.settingsprod
+python manage.py collectstatic --settings=mapchecrm_django.settingsprod
 #supervisorctl restart mapchecrm_django
 
 # Install Static files Django Admin
@@ -123,11 +123,11 @@ sudo mv /root/setup/robots.txt /webapps/mapchi/dist/
 #sudo mv /root /webapps/mapchi/staging_dist
 
 # Migrate data from sqlite to postgres
-cd /root/setup/
-pgloader pgloader_config.load
+#cd /root/setup/
+#pgloader pgloader_config.load
 
 # Output completion message
-echo "DB migration successfull"
+#echo "DB migration successfull"
 
 # Remove old files
 rm -fr /webapps/mapchi/environment_3_8_2/mapchecrm-main
