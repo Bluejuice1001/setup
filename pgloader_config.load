@@ -8,8 +8,3 @@ LOAD DATABASE
       maintenance_work_mem to '128MB',
       work_mem to '12MB';
 
-LOAD DATABASE
-     FROM sqlite:///webapps/mapchi/environment_3_8_2/mapchecrm_django/db.sqlite3
-     INTO postgresql://mapchiuser:mapchipassword@localhost:5432/mapchi
-
- WITH data only
