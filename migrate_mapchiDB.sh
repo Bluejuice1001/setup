@@ -24,6 +24,7 @@ pip install -r /webapps/mapchi/req.txt
 
 # Copy settings file to new location
 sudo mv /root/setup/settingsprod.py /webapps/mapchi/environment_3_8_2/mapchecrm_django/mapchecrm_django/
+sudo chown -R mapchiuser:webapps /webapps/mapchi/environment_3_8_2/
 
 # Add new tables to postgres
 source /webapps/mapchi/environment_3_8_2/bin/activate
