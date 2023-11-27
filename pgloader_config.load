@@ -4,6 +4,3 @@ LOAD DATABASE
 
 WITH schema only;
 
-SET PostgreSQL PARAMETERS
-    maintenance_work_mem to '128MB',
-    work_mem to '12MB';
