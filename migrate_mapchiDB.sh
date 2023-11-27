@@ -6,6 +6,25 @@ current_date=$(date +"%Y%m%d_%H%M%S")
 backup_file="/webapps/mapchi/DB-Backup/backup_file_${current_date}.dump"
 PGPASSWORD=mapchipassword pg_dump -h localhost -U mapchiuser -d mapchi -Fc -f "${backup_file}"
 
+# Copy new code
+source environment_3_8_2/bin/activate
+cd environment_3_8_2/
+rm -fr mapchecrm-main
+sudo -u mapchiuser git clone 'https://github.com/Bluejuice1001/mapchecrm-main.git'
+cd mapchecrm-main
+rm -fr /webapps/mapchi/environment_3_8_2/mapchecrm_django
+mv mapchecrm_django/ /webapps/mapchi/environment_3_8_2/
+rm -fr mapchecrm-main
+
+
+# Move file req.txt to be accessible by mapchiuser
+sudo mv /root/setup/req.txt /webapps/mapchi/req.txt
+sudo chown mapchiuser:webapps /webapps/mapchi/req.txt
+
+# Install dependencies
+pip install -r /webapps/mapchi/req.txt
+
+
 # Add new tables to postgres
 cd /webapps/mapchi/environment_3_8_2/mapchecrm_django
 python manage.py makemigrations --settings mapchecrm_django.settingsprod
