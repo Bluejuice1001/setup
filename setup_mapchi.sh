@@ -123,6 +123,7 @@ sudo mv /root/setup/robots.txt /webapps/mapchi/dist/
 #sudo mv /root /webapps/mapchi/staging_dist
 
 # Migrate data from sqlite to postgres
+cd /root/setup/
 pgloader pgloader_config.load
 
 # Output completion message
