@@ -125,7 +125,6 @@ sudo mv /root/setup/robots.txt /webapps/mapchi/dist/
 # Migrate data from sqlite to postgres
 cd /root/setup/
 pgloader pgloader_config.load
-pgloader pgloader_config_data.load
 
 # Output completion message
 echo "DB migration successfull"
