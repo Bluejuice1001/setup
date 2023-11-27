@@ -49,6 +49,11 @@ sudo mv /root/setup/robots.txt /webapps/mapchi/dist/
 rm -f /webapps/mapchi/staging_dist
 sudo mv /root/dist /webapps/mapchi/staging_dist
 
+# Remove old files
+rm -fr /webapps/mapchi/environment_3_8_2/mapchecrm-main
+rm -fr /webapps/mapchi/req.txt
+#rm -fr /root/setup/pgloader_config.load
+
 # Only if i have to dumb and move data accross
 #python manage.py dumpdata > data.json
 #python manage.py loaddata data.json --settings=mapchecrm_django.settingsprod
