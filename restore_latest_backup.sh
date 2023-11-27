@@ -14,7 +14,7 @@ if [ -n "$latest_backup" ]; then
     backup_file="$backup_dir/$latest_backup"
 
     # Restore the latest backup
-    pg_restore -h localhost -U mapchiuser -d mapchi -Fc -c "$backup_file"
+    PGPASSWORD=mapchipassword pg_restore -h localhost -U mapchiuser -d mapchi -Fc -c "$backup_file"
 
     echo "Restore completed."
 else
