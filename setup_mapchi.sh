@@ -138,4 +138,4 @@ rm -fr /webapps/mapchi/req.txt
 echo "Mapchi setup completed successfully."
 
 # Reboot server
-sudo reboot now
+#sudo reboot now
