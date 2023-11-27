@@ -1,10 +1,15 @@
 #!/bin/bash
 
 # Add new tables to postgres
-cd /webapps/mapchi/environment_3_8_2/mapchecrm_django
-python manage.py makemigrations --settings mapchecrm_django.settingsprod
-python manage.py migrate --settings mapchecrm_django.settingsprod
-supervisorctl restart mapchecrm_django
+current_date=$(date +"%Y%m%d_%H%M%S")
+backup_file="/webapps/mapchi/backup_file_${current_date}.dump"
+pg_dump -h localhost -U your_username -d your_database_name -Fc -f "${backup_file}"
+#cd /webapps/mapchi/environment_3_8_2/mapchecrm_django
+#python manage.py makemigrations --settings mapchecrm_django.settingsprod
+#python manage.py migrate --settings mapchecrm_django.settingsprod
+#supervisorctl restart mapchecrm_django
+#python manage.py dumpdata > data.json
+#python manage.py loaddata data.json --settings=mapchecrm_django.settingsprod
 
 # Output completion message
 echo "DB migration successfull"
