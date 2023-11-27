@@ -24,6 +24,8 @@ sudo chown mapchiuser:webapps /webapps/mapchi/req.txt
 # Install dependencies
 pip install -r /webapps/mapchi/req.txt
 
+# Copy settings file to new location
+sudo mv /root/setup/settingsprod.py /webapps/mapchi/environment_3_8_2/mapchecrm_django/mapchecrm_django/
 
 # Add new tables to postgres
 cd /webapps/mapchi/environment_3_8_2/mapchecrm_django
