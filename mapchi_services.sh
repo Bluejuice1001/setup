@@ -66,6 +66,9 @@ function brand_new_server() {
             *) echo "Invalid choice. Please try again.";;
         esac
     done
+    # Clear the screen after exiting the loop
+    clear
+
 }
 
 function setup_new_server() {
@@ -276,6 +279,9 @@ function restore_database() {
             *) echo "Invalid choice. Please try again.";;
         esac
     done
+    
+    # Clear the screen after exiting the loop
+    clear
 }
 
 function restore_latest_backup() {
@@ -333,7 +339,6 @@ show_intro
 
 # Display menu
 while true; do
-    clear  # Clear the screen to keep the intro visible
     echo "Mapchi Services Menu"
     echo "1. Update Server Software Packages"
     echo "2. Setup New Server Instance"
