@@ -1,5 +1,12 @@
 #!/bin/bash
 
+function show_intro() {
+    clear
+    echo "*********************************************"
+    echo "                 MAPCHI Services               "
+    echo "*********************************************"
+}
+
 function update_server() {
     echo "Updating server packages..."
     sudo apt update
@@ -9,7 +16,59 @@ function update_server() {
     echo "Server packages updated successfully."
 }
 
+function setup_ssl_and_nginx() {
+    echo "Setting up SSL certificates and Nginx..."
+    
+    # Get SSL certificate
+    sudo certbot -d mapchi.com
+    sudo certbot -d api.mapchi.com
+    sudo certbot -d staging.mapchi.com
+    sudo certbot -d www.mapchi.com
+
+    # Setup Nginx
+    sudo mv /root/setup/www.mapchi.com /etc/nginx/sites-available/
+    sudo mv /root/setup/mapchi.com /etc/nginx/sites-available/
+    sudo mv /root/setup/api.mapchi.com /etc/nginx/sites-available/
+    sudo mv /root/setup/staging.mapchi.com /etc/nginx/sites-available/
+    cd /etc/nginx/sites-enabled
+    rm mapchisetup.com
+    rm api.mapchisetup.com
+    rm www.mapchi.com
+    ln -s ../sites-available/www.mapchi.com .
+    rm mapchi.com
+    ln -s ../sites-available/mapchi.com .
+    rm api.mapchi.com
+    ln -s ../sites-available/api.mapchi.com .
+    rm staging.mapchi.com
+    ln -s ../sites-available/staging.mapchi.com .
+
+    # Restart some services
+    service nginx restart
+    supervisorctl restart mapchecrm_django
+    service nginx restart
+
+    echo "SSL certificates and Nginx setup completed successfully."
+}
+
 function brand_new_server() {
+    while true; do
+        echo "Setup New Server Instance"
+        echo "1. Create New Server Instance"
+        echo "2. Setup SSL Certificates and Nginx"
+        echo "x. Back to Menu"
+        echo -n "Enter your choice (1, 2, or x): "
+        read brand_new_choice
+
+        case $brand_new_choice in
+            1) setup_new_server;;
+            2) setup_ssl_and_nginx;;
+            x) break;;
+            *) echo "Invalid choice. Please try again.";;
+        esac
+    done
+}
+
+function setup_new_server() {
     echo "Setting up a brand new server instance..."
     echo "Update and upgrade server to be up to date"
     sudo apt update
@@ -269,11 +328,15 @@ function restore_specific_version() {
     fi
 }
 
+# Display intro
+show_intro
+
 # Display menu
 while true; do
+    clear  # Clear the screen to keep the intro visible
     echo "Mapchi Services Menu"
-    echo "1. Update Server Packages"
-    echo "2. Setup Brand New Server Instance"
+    echo "1. Update Server Software Packages"
+    echo "2. Setup New Server Instance"
     echo "3. Deploy Updated Mapchi Django and Vue Version"
     echo "4. Restore Database"
     echo "x. Exit"
