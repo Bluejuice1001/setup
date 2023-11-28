@@ -52,7 +52,6 @@ function setup_ssl_and_nginx() {
 
 function brand_new_server() {
     while true; do
-        clear
         show_intro
         echo "Setup New Server Instance"
         echo "1. Create New Server Instance"
@@ -68,9 +67,6 @@ function brand_new_server() {
             *) echo "Invalid choice. Please try again.";;
         esac
     done
-    # Clear the screen after exiting the loop
-    clear
-
 }
 
 function setup_new_server() {
@@ -267,7 +263,6 @@ echo "DB migration successfull"
 
 function restore_database() {
     while true; do
-        clear
         show_intro
         echo "Restoring database..."
         echo "1. Restore latest backup"
@@ -283,9 +278,6 @@ function restore_database() {
             *) echo "Invalid choice. Please try again.";;
         esac
     done
-    
-    # Clear the screen after exiting the loop
-    clear
 }
 
 function restore_latest_backup() {
@@ -342,7 +334,6 @@ function restore_specific_version() {
 
 # Display menu
 while true; do
-    clear
     show_intro
     echo "Mapchi Services Menu"
     echo "1. Update Server Software Packages"
