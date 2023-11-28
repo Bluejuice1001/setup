@@ -52,6 +52,8 @@ function setup_ssl_and_nginx() {
 
 function brand_new_server() {
     while true; do
+        clear
+        show_intro
         echo "Setup New Server Instance"
         echo "1. Create New Server Instance"
         echo "2. Setup SSL Certificates and Nginx"
@@ -265,6 +267,8 @@ echo "DB migration successfull"
 
 function restore_database() {
     while true; do
+        clear
+        show_intro
         echo "Restoring database..."
         echo "1. Restore latest backup"
         echo "2. Restore with a specific version"
@@ -334,11 +338,12 @@ function restore_specific_version() {
     fi
 }
 
-# Display intro
-show_intro
+
 
 # Display menu
 while true; do
+    clear
+    show_intro
     echo "Mapchi Services Menu"
     echo "1. Update Server Software Packages"
     echo "2. Setup New Server Instance"
