@@ -330,6 +330,53 @@ function restore_specific_version() {
     fi
 }
 
+function database_menu() {
+    while true; do
+        echo "Database Menu"
+        echo "1. Create Database"
+        echo "2. Drop Database"
+        echo "3. Copy Data to Database"
+        echo "4. Create Database Structure"
+        echo "x. Back to Menu"
+        echo -n "Enter your choice (1, 2, 3, 4, or x): "
+        read db_choice
+
+        case $db_choice in
+            1) create_database;;
+            2) drop_database;;
+            3) copy_data_to_database;;
+            4) create_database_structure;;
+            x) break;;
+            *) echo "Invalid choice. Please try again.";;
+        esac
+    done
+}
+
+function create_database() {
+    echo "Creating database..."
+    # Add your steps to create a database here
+    echo "Database created successfully."
+}
+
+function drop_database() {
+    echo "Dropping database..."
+    # Add your steps to drop a database here
+    dropdb -h localhost -U mapchiuser mapchi
+    echo "Database dropped successfully."
+}
+
+function copy_data_to_database() {
+    echo "Copying data to database..."
+    # Add your steps to copy data to a database here
+    echo "Data copied to database successfully."
+}
+
+function create_database_structure() {
+    echo "Creating database structure..."
+    # Add your steps to create a database structure here
+    echo "Database structure created successfully."
+}
+
 
 
 # Display menu
@@ -340,6 +387,7 @@ while true; do
     echo "2. Setup New Server Instance"
     echo "3. Deploy Updated Mapchi Django and Vue Version"
     echo "4. Restore Database"
+    echo "5. Database"
     echo "x. Exit"
     echo -n "Enter your choice (1, 2, 3, 4, or x): "
     read choice
@@ -349,6 +397,7 @@ while true; do
         2) brand_new_server;;
         3) update_code;;
         4) restore_database;;
+        5) database_menu;;
         x) exit;;
         *) echo "Invalid choice. Please try again.";;
     esac
