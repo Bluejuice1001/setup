@@ -413,8 +413,8 @@ while true; do
     if [ -d "/webapps/mapchi/DB-Backup" ]; then
         echo "4. Database"
         echo "5. Restore Client Data"
+        echo "x. Exit" 
         echo -n "Enter your choice (1, 2, 3, 4, 5, or x): "
-        read choice        
     fi
     echo "x. Exit"    
     echo -n "Enter your choice (1, 2, 3 or x): "
