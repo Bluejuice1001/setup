@@ -442,6 +442,15 @@ function edit_settings() {
     fi
 }
 
+function connect_to_database() {
+    echo "Connecting to the Mapchi database..."
+
+    # Connect to the Mapchi database using PostgreSQL
+    sudo -u postgres psql -d mapchi
+    \dt
+    echo "Connection to the Mapchi database closed."
+}
+
 # Display menu
 while true; do
     show_intro
@@ -455,11 +464,13 @@ while true; do
         echo "5. Backup Client Data"
         echo "6. Restore Client Data"
         echo "7. Edit settingsprod.py"
+        echo "8. Connect to Mapchi Database"
         echo "x. Exit"
-        echo -n "Enter your choice (1, 2, 3, 4, 5, 6, 7 or x): "
+        echo -n "Enter your choice (1, 2, 3, 4, 5, 6, 7, 8 or x): "
     else
+        echo "4. Connect to Mapchi Database"
         echo "x. Exit"
-        echo -n "Enter your choice (1, 2, 3, or x): "
+        echo -n "Enter your choice (1, 2, 3, 4 or x): "
     fi
     
     read choice
@@ -472,6 +483,7 @@ while true; do
         5) backupDB;;
         6) restore_database;;
         7) edit_settings;;
+        8) connect_to_database;;
         x) exit;;
         *) echo "Invalid choice. Please try again.";;
     esac
