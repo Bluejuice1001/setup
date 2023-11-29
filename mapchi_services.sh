@@ -239,21 +239,10 @@ python manage.py makemigrations --settings mapchecrm_django.settingsprod
 python manage.py migrate --settings mapchecrm_django.settingsprod
 supervisorctl restart mapchecrm_django
 
-# Add compiled website front
-sudo mv /root/setup/dist /webapps/mapchi/dist
-sudo chown -R mapchiuser:webapps /webapps/mapchi/dist
-sudo mkdir /webapps/mapchi/dist/.well-known
-sudo mv /root/setup/apple-developer-merchantid-domain-association /webapps/mapchi/dist/.well-known
-sudo mv /root/setup/iframe.html /webapps/mapchi/dist/
-sudo mv /root/setup/widget.html /webapps/mapchi/dist/
-sudo mv /root/setup/loader.js /webapps/mapchi/dist/
-sudo mv /root/setup/loaderiframe.js /webapps/mapchi/dist/
-sudo mv /root/setup/loaderiframetest.js /webapps/mapchi/dist/
-sudo mv /root/setup/loaderwidget.js /webapps/mapchi/dist/
-sudo mv /root/setup/sitemap.xml /webapps/mapchi/dist/
-sudo mv /root/setup/robots.txt /webapps/mapchi/dist/
+# Add compiled website Staging Website
 rm -fr /webapps/mapchi/staging_dist
-sudo mv /root/dist /webapps/mapchi/staging_dist
+sudo mv /root/setup/dist /webapps/mapchi/staging_dist
+sudo chown -R mapchiuser:webapps /webapps/mapchi/
 
 # Remove old files
 rm -fr /webapps/mapchi/environment_3_8_2/mapchecrm-main
@@ -457,12 +446,78 @@ function connect_to_database() {
     echo "Connection to the Mapchi database closed."
 }
 
+function go_live() {
+    echo "Replacing dist with staging_dist..."
+
+    # Backup dist time stamp
+    sudo mkdir /webapps/mapchi/dist-backup
+
+    # Directory to be backed up
+    backup_source="/webapps/mapchi/dist"
+    
+    # Backup destination directory
+    backup_dir="/webapps/mapchi/dist-backup"
+    
+    # Create a unique identifier for the backup file
+    current_date=$(date +"%Y%m%d_%H%M%S")
+
+    # Compressed archive filename
+    backup_file="${backup_dir}/backup_directory_${current_date}.tar.gz"
+
+    # Create the backup using tar
+    tar -czf "${backup_file}" -C "$(dirname "${backup_source}")" "$(basename "${backup_source}")"
+
+    mv /webapps/mapchi/staging_dist /webapps/mapchi/dist
+    sudo mkdir /webapps/mapchi/dist/.well-known
+    sudo mv /root/setup/apple-developer-merchantid-domain-association /webapps/mapchi/dist/.well-known
+    sudo mv /root/setup/iframe.html /webapps/mapchi/dist/
+    sudo mv /root/setup/widget.html /webapps/mapchi/dist/
+    sudo mv /root/setup/loader.js /webapps/mapchi/dist/
+    sudo mv /root/setup/loaderiframe.js /webapps/mapchi/dist/
+    sudo mv /root/setup/loaderiframetest.js /webapps/mapchi/dist/
+    sudo mv /root/setup/loaderwidget.js /webapps/mapchi/dist/
+    sudo mv /root/setup/sitemap.xml /webapps/mapchi/dist/
+    sudo mv /root/setup/robots.txt /webapps/mapchi/dist/
+}
+
+function restore_live() {
+    echo "Restoring previous live version..."
+
+    # Check if there are backups available
+    backup_dir="/webapps/mapchi/dist-backup"
+    
+    if [ "$(ls -A $backup_dir)" ]; then
+        # List available backups
+        echo "Available backups:"
+        ls -1 "$backup_dir"
+        
+        echo -n "Do you want to restore the latest backup? (y/n): "
+        read restore_latest
+
+        if [ "$restore_latest" == "y" ]; then
+            # Restore the latest backup
+            latest_backup=$(ls -t $backup_dir | head -n1)
+            echo "Restoring the latest backup: $latest_backup"
+            tar -xzf "${backup_dir}/${latest_backup}" -C /webapps/mapchi/
+        else
+            # Let the user choose a specific version
+            echo "Enter the backup filename to restore: "
+            read specific_backup
+            tar -xzf "${backup_dir}/${specific_backup}" -C /webapps/mapchi/
+        fi
+
+        echo "Live version restored successfully."
+    else
+        echo "No backups found in $backup_dir. Cannot restore."
+    fi
+}
+
 # Display menu
 while true; do
     show_intro
     echo "Mapchi Services Menu"
     echo "1. New Server"
-    echo "2. Upload new Mapchi version"
+    echo "2. Upload new Mapchi version Staging"
     echo "3. Update Server Software Packages"
     
     if [ -d "/webapps/mapchi/DB-Backup" ]; then
@@ -471,6 +526,8 @@ while true; do
         echo "6. Restore Client Data"
         echo "7. Edit settingsprod.py"
         echo "8. Connect to Mapchi Database"
+        echo "9. Go Live with Mapchi Staging (This will move latest Staging to Live environment, only after hours)
+        echo "10. Restore previous Live Mapchi version"
         echo "x. Exit"
         echo -n "Enter your choice (1, 2, 3, 4, 5, 6, 7, 8 or x): "
     else
@@ -490,6 +547,8 @@ while true; do
         6) restore_database;;
         7) edit_settings;;
         8) connect_to_database;;
+        9) go_live;;
+        10) restore_live;;
         x) exit;;
         *) echo "Invalid choice. Please try again.";;
     esac
