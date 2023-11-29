@@ -336,7 +336,7 @@ function database_menu() {
         echo "1. Create Mapchi Database"
         echo "2. Drop Mapchi Database"
         echo "3. Copy Data to Database"
-        echo "4. Create Database Structure"
+        echo "4. Update Database Structure"
         echo "x. Back to Menu"
         echo -n "Enter your choice (1, 2, 3, 4, or x): "
         read db_choice
@@ -372,9 +372,16 @@ function copy_data_to_database() {
 }
 
 function create_database_structure() {
-    echo "Creating database structure..."
-    # Add your steps to create a database structure here
-    echo "Database structure created successfully."
+    echo "Update database structure..."
+
+    # Add new tables to postgres
+    source /webapps/mapchi/environment_3_8_2/bin/activate
+    cd /webapps/mapchi/environment_3_8_2/mapchecrm_django
+    python manage.py makemigrations --settings mapchecrm_django.settingsprod
+    python manage.py migrate --settings mapchecrm_django.settingsprod
+    supervisorctl restart mapchecrm_django
+
+    echo "Database structure updated successfully."
 }
 
 
