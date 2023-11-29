@@ -526,7 +526,7 @@ while true; do
         echo "6. Restore Client Data"
         echo "7. Edit settingsprod.py"
         echo "8. Connect to Mapchi Database"
-        echo "9. Go Live with Mapchi Staging (This will move latest Staging to Live environment, only after hours)
+        echo "9. Go Live with Mapchi Staging (This will move latest Staging to Live environment, only after hours)"
         echo "10. Restore previous Live Mapchi version"
         echo "x. Exit"
         echo -n "Enter your choice (1, 2, 3, 4, 5, 6, 7, 8 or x): "
