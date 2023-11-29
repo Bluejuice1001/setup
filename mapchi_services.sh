@@ -209,6 +209,7 @@ sudo -u mapchiuser git clone 'https://github.com/Bluejuice1001/mapchecrm-main.gi
 cd mapchecrm-main
 rm -fr /webapps/mapchi/environment_3_8_2/mapchecrm_django
 mv mapchecrm_django/ /webapps/mapchi/environment_3_8_2/
+cd /webapps/mapchi/environment_3_8_2/
 rm -fr mapchecrm-main
 
 
