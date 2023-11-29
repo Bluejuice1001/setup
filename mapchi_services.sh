@@ -332,6 +332,7 @@ function restore_specific_version() {
 
 function database_menu() {
     while true; do
+        show_intro
         echo "Database Menu"
         echo "1. Create Mapchi Database"
         echo "2. Drop Mapchi Database"
