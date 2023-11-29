@@ -128,7 +128,7 @@ function setup_new_server() {
     sudo mv /root/setup/settingsprod.py /webapps/mapchi/environment_3_8_2/mapchecrm_django/mapchecrm_django/
 
     echo "Install and setup Gunicorn"
-        pip install gunicorn
+    pip install gunicorn
     sudo mkdir /webapps/mapchi/environment_3_8_2/run
     sudo mv /root/setup/gunicorn_start /webapps/mapchi/environment_3_8_2/bin/gunicorn_start
     sudo chmod +x /webapps/mapchi/environment_3_8_2/bin/gunicorn_start
@@ -220,8 +220,16 @@ sudo chown mapchiuser:webapps /webapps/mapchi/req.txt
 # Install dependencies
 pip install -r /webapps/mapchi/req.txt
 
-# Copy settings file to new location
-sudo mv /root/setup/settingsprod.py /webapps/mapchi/environment_3_8_2/mapchecrm_django/mapchecrm_django/settingsprod.py
+echo "Copy settings file to new location"
+sudo mv /root/setup/settingsprod.py /webapps/mapchi/environment_3_8_2/mapchecrm_django/mapchecrm_django/
+
+echo "Change defaults settings.pg to settingsprod/py"
+deactivate
+source /webapps/mapchi/environment_3_8_2/bin/activate
+cd /webapps/mapchi/environment_3_8_2/mapchecrm_django
+sudo mkdir /webapps/mapchi/environment_3_8_2/mapchecrm_django/static
+python manage.py collectstatic --settings=mapchecrm_django.settingsprod
+
 sudo chown -R mapchiuser:webapps /webapps/mapchi/environment_3_8_2/
 
 # Add new tables to postgres
