@@ -189,6 +189,7 @@ function setup_new_server() {
     echo "Removing old files"
     rm -fr /webapps/mapchi/environment_3_8_2/mapchecrm-main
     rm -fr /webapps/mapchi/req.txt
+    rm -rf /root/setup/pgloader_config.load
 
     echo "Brand new server instance setup completed successfully."
 }
