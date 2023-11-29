@@ -291,26 +291,33 @@ function restore_database() {
 
 function restore_latest_backup() {
     echo "Restoring the latest backup..."
-# Directory where backups are stored
-backup_dir="/webapps/mapchi/DB-Backup/"
 
-# Find the latest backup file
-latest_backup=$(ls -t $backup_dir | head -n1)
+    # Directory where backups are stored
+    backup_dir="/webapps/mapchi/DB-Backup/"
 
-# Check if a backup file exists
-if [ -n "$latest_backup" ]; then
-    echo "Latest backup file found: $latest_backup"
+    # Check if the backup directory exists
+    if [ -d "$backup_dir" ]; then
+        # Find the latest backup file
+        latest_backup=$(ls -t "$backup_dir" | head -n1)
 
-    # Full path to the latest backup file
-    backup_file="$backup_dir/$latest_backup"
+        # Check if a backup file exists
+        if [ -n "$latest_backup" ]; then
+            echo "Latest backup file found: $latest_backup"
 
-    # Restore the latest backup
-    PGPASSWORD=mapchipassword pg_restore -h localhost -U mapchiuser -d mapchi -Fc -c "$backup_file"
+            # Full path to the latest backup file
+            backup_file="$backup_dir/$latest_backup"
 
-    echo "Restore completed."
-else
-    echo "No backup files found in $backup_dir"
-fi
+            # Restore the latest backup
+            PGPASSWORD=mapchipassword pg_restore -h localhost -U mapchiuser -d mapchi -Fc -c "$backup_file"
+
+            echo "Restore completed."
+        else
+            echo "No backup files found in $backup_dir"
+        fi
+    else
+        echo "Backup directory $backup_dir not found."
+    fi
+
     echo "Latest backup restored successfully."
 }
 
