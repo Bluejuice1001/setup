@@ -415,9 +415,11 @@ while true; do
         echo "5. Restore Client Data"
         echo "x. Exit" 
         echo -n "Enter your choice (1, 2, 3, 4, 5, or x): "
+    else
+        echo "x. Exit"
+        echo -n "Enter your choice (1, 2, 3, or x): "
     fi
-    echo "x. Exit"    
-    echo -n "Enter your choice (1, 2, 3 or x): "
+    
     read choice
 
     case $choice in
