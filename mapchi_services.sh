@@ -252,7 +252,7 @@ sudo mv /root/setup/loaderiframetest.js /webapps/mapchi/dist/
 sudo mv /root/setup/loaderwidget.js /webapps/mapchi/dist/
 sudo mv /root/setup/sitemap.xml /webapps/mapchi/dist/
 sudo mv /root/setup/robots.txt /webapps/mapchi/dist/
-rm -f /webapps/mapchi/staging_dist
+rm -fr /webapps/mapchi/staging_dist
 sudo mv /root/dist /webapps/mapchi/staging_dist
 
 # Remove old files
