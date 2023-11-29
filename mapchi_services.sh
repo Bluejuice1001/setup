@@ -292,7 +292,7 @@ function restore_database() {
 function restore_latest_backup() {
     echo "Restoring the latest backup..."
 # Directory where backups are stored
-backup_dir="/webapps/mapchi/DB-Backup"
+backup_dir="/webapps/mapchi/DB-Backup/"
 
 # Find the latest backup file
 latest_backup=$(ls -t $backup_dir | head -n1)
