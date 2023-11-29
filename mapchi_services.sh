@@ -259,7 +259,13 @@ sudo mv /root/dist /webapps/mapchi/staging_dist
 rm -fr /webapps/mapchi/environment_3_8_2/mapchecrm-main
 rm -fr /webapps/mapchi/req.txt
 rm -fr /root/setup/pgloader_config.load
-
+rm -fr /root/setup/mapchisetup.com
+rm -fr /root/setup/api.mapchisetup.com
+rm -fr /root/setup/api.mapchi.com
+rm -fr /root/setup/mapchi.com
+rm -fr /root/setup/www.mapchi.com
+rm -fr /root/setup/staging.mapchi.com
+    
 # Only if i have to dumb and move data accross
 #python manage.py dumpdata > data.json
 #python manage.py loaddata data.json --settings=mapchecrm_django.settingsprod
