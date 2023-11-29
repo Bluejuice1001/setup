@@ -466,7 +466,7 @@ function go_live() {
 
     # Create the backup using tar
     tar -czf "${backup_file}" -C "$(dirname "${backup_source}")" "$(basename "${backup_source}")"
-
+    rm -fr /webapps/mapchi/dist
     mv /webapps/mapchi/staging_dist /webapps/mapchi/dist
     sudo mkdir /webapps/mapchi/dist/.well-known
     sudo mv /root/setup/apple-developer-merchantid-domain-association /webapps/mapchi/dist/.well-known
