@@ -203,6 +203,7 @@ backup_file="/webapps/mapchi/DB-Backup/backup_file_${current_date}.dump"
 PGPASSWORD=mapchipassword pg_dump -h localhost -U mapchiuser -d mapchi -Fc -f "${backup_file}"
 
 # Copy new code
+cd /webapps/mapchi/environment_3_8_2/
 rm -fr mapchecrm-main
 sudo -u mapchiuser git clone 'https://github.com/Bluejuice1001/mapchecrm-main.git'
 cd mapchecrm-main
@@ -229,7 +230,7 @@ python manage.py makemigrations --settings mapchecrm_django.settingsprod
 python manage.py migrate --settings mapchecrm_django.settingsprod
 supervisorctl restart mapchecrm_django
 
-# Add compiled website front (First one live website, second one staging website)
+# Add compiled website front
 sudo mv /root/setup/dist /webapps/mapchi/dist
 sudo chown -R mapchiuser:webapps /webapps/mapchi/dist
 sudo mkdir /webapps/mapchi/dist/.well-known
@@ -248,14 +249,14 @@ sudo mv /root/dist /webapps/mapchi/staging_dist
 # Remove old files
 rm -fr /webapps/mapchi/environment_3_8_2/mapchecrm-main
 rm -fr /webapps/mapchi/req.txt
-#rm -fr /root/setup/pgloader_config.load
+rm -fr /root/setup/pgloader_config.load
 
 # Only if i have to dumb and move data accross
 #python manage.py dumpdata > data.json
 #python manage.py loaddata data.json --settings=mapchecrm_django.settingsprod
 
 # Output completion message
-echo "DB migration successfull"
+#echo "DB migration successfull"
 
     echo "Mapchi Django and Vue updated successfully."
 }
