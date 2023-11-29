@@ -333,8 +333,8 @@ function restore_specific_version() {
 function database_menu() {
     while true; do
         echo "Database Menu"
-        echo "1. Create Database"
-        echo "2. Drop Database"
+        echo "1. Create Mapchi Database"
+        echo "2. Drop Mapchi Database"
         echo "3. Copy Data to Database"
         echo "4. Create Database Structure"
         echo "x. Back to Menu"
@@ -383,9 +383,9 @@ function create_database_structure() {
 while true; do
     show_intro
     echo "Mapchi Services Menu"
-    echo "1. Update Server Software Packages"
-    echo "2. Setup New Server Instance"
-    echo "3. Deploy Updated Mapchi Django and Vue Version"
+    echo "1. New Server"
+    echo "2. Upload new Mapchi version"
+    echo "3. Update Server Software Packages"
     echo "4. Restore Database"
     echo "5. Database"
     echo "x. Exit"
@@ -393,9 +393,9 @@ while true; do
     read choice
 
     case $choice in
-        1) update_server;;
-        2) brand_new_server;;
-        3) update_code;;
+        1) brand_new_server;;
+        2) update_code;;
+        3) update_server;;
         4) restore_database;;
         5) database_menu;;
         x) exit;;
