@@ -186,6 +186,8 @@ function setup_new_server() {
 
     echo "DB migration successfull"
 
+    sudo mkdir /webapps/mapchi/DB-Backup
+    
     echo "Removing old files"
     rm -fr /webapps/mapchi/environment_3_8_2/mapchecrm-main
     rm -fr /webapps/mapchi/req.txt
