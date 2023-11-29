@@ -415,6 +415,16 @@ function create_database_structure() {
     echo "Database structure updated successfully."
 }
 
+function backupDB() {
+ echo "Backing up client data..."
+ 
+ current_date=$(date +"%Y%m%d_%H%M%S")
+ backup_file="/webapps/mapchi/DB-Backup/manual-backup_file_${current_date}.dump"
+ PGPASSWORD=mapchipassword pg_dump -h localhost -U mapchiuser -d mapchi -Fc -f "${backup_file}"
+
+ echo "Backup completed successfully."
+}
+
 function edit_settings() {
     echo "Editing settingsprod.py..."
     
