@@ -407,19 +407,24 @@ while true; do
     echo "Mapchi Services Menu"
     echo "1. New Server"
     echo "2. Upload new Mapchi version"
-    echo "3. Database"
-    echo "4. Restore Client Data"
-    echo "5. Update Server Software Packages"
+    echo "3. Update Server Software Packages"
     echo "x. Exit"
-    echo -n "Enter your choice (1, 2, 3, 4, or x): "
+    
+    if [ -d "/webapps/mapchi/DB-Backup" ]; then
+        echo "4. Database"
+        echo "5. Restore Client Data"
+    fi
+    
+    echo -n "Enter your choice (1, 2, 3, 4, 5, or x): "
     read choice
 
     case $choice in
         1) brand_new_server;;
         2) update_code;;
-        3) database_menu;;
-        4) restore_database;;
-        5) update_server;;        
+        3) update_server;;
+        4) database_menu;;
+        5) restore_database;;
+
         x) exit;;
         *) echo "Invalid choice. Please try again.";;
     esac
