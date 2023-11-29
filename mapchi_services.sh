@@ -415,7 +415,22 @@ function create_database_structure() {
     echo "Database structure updated successfully."
 }
 
+function edit_settings() {
+    echo "Editing settingsprod.py..."
+    
+    # Full path to settingsprod.py file
+    settings_file="/webapps/mapchi/environment_3_8_2/mapchecrm_django/mapchecrm_django/settingsprod.py"
 
+    # Check if the settings file exists
+    if [ -f "$settings_file" ]; then
+        # Open the settingsprod.py file for editing
+        nano "$settings_file"
+        
+        echo "settingsprod.py edited successfully."
+    else
+        echo "Error: settingsprod.py file not found at $settings_file"
+    fi
+}
 
 # Display menu
 while true; do
@@ -428,8 +443,9 @@ while true; do
     if [ -d "/webapps/mapchi/DB-Backup" ]; then
         echo "4. Database"
         echo "5. Restore Client Data"
-        echo "x. Exit" 
-        echo -n "Enter your choice (1, 2, 3, 4, 5, or x): "
+        echo "6. Edit settingsprod.py"
+        echo "x. Exit"
+        echo -n "Enter your choice (1, 2, 3, 4, 5, 6, or x): "
     else
         echo "x. Exit"
         echo -n "Enter your choice (1, 2, 3, or x): "
@@ -443,7 +459,7 @@ while true; do
         3) update_server;;
         4) database_menu;;
         5) restore_database;;
-
+        6) edit_settings;;
         x) exit;;
         *) echo "Invalid choice. Please try again.";;
     esac
