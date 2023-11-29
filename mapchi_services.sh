@@ -354,7 +354,16 @@ function database_menu() {
 
 function create_database() {
     echo "Creating database..."
-    # Add your steps to create a database here
+
+    # Create PostgreSQL Database
+    sudo -u postgres psql -c "CREATE DATABASE mapchi;"
+    sudo -u postgres psql -c "CREATE USER mapchiuser WITH PASSWORD 'mapchipassword';"
+    sudo -u postgres psql -c "ALTER ROLE mapchiuser SET client_encoding TO 'utf8';"
+    sudo -u postgres psql -c "ALTER ROLE mapchiuser SET default_transaction_isolation TO 'read committed';"
+    sudo -u postgres psql -c "ALTER ROLE mapchiuser SET timezone TO 'UTC';"
+    sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE mapchi TO mapchiuser;"
+    sudo -u postgres psql -c "ALTER USER mapchiuser WITH SUPERUSER;"
+    
     echo "Database created successfully."
 }
 
