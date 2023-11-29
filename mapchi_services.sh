@@ -452,10 +452,11 @@ while true; do
     
     if [ -d "/webapps/mapchi/DB-Backup" ]; then
         echo "4. Database"
-        echo "5. Restore Client Data"
-        echo "6. Edit settingsprod.py"
+        echo "5. Backup Client Data"
+        echo "6. Restore Client Data"
+        echo "7. Edit settingsprod.py"
         echo "x. Exit"
-        echo -n "Enter your choice (1, 2, 3, 4, 5, 6, or x): "
+        echo -n "Enter your choice (1, 2, 3, 4, 5, 6, 7 or x): "
     else
         echo "x. Exit"
         echo -n "Enter your choice (1, 2, 3, or x): "
@@ -468,8 +469,9 @@ while true; do
         2) update_code;;
         3) update_server;;
         4) database_menu;;
-        5) restore_database;;
-        6) edit_settings;;
+        5) backupDB;;
+        6) restore_database;;
+        7) edit_settings;;
         x) exit;;
         *) echo "Invalid choice. Please try again.";;
     esac
