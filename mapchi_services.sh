@@ -155,7 +155,7 @@ function setup_new_server() {
     echo "Restart some services"
     service nginx restart
 
-    echo "Change defaults settings.pg to settingsprod/py"
+    echo "Change defaults settings.pg to settingsprod.py"
     deactivate
     source /webapps/mapchi/environment_3_8_2/bin/activate
     cd /webapps/mapchi/environment_3_8_2/mapchecrm_django
