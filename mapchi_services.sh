@@ -409,7 +409,6 @@ while true; do
     echo "1. New Server"
     echo "2. Upload new Mapchi version"
     echo "3. Update Server Software Packages"
-    echo "x. Exit"
     
     if [ -d "/webapps/mapchi/DB-Backup" ]; then
         echo "4. Database"
@@ -417,7 +416,7 @@ while true; do
         echo -n "Enter your choice (1, 2, 3, 4, 5, or x): "
         read choice        
     fi
-    
+    echo "x. Exit"    
     echo -n "Enter your choice (1, 2, 3 or x): "
     read choice
 
