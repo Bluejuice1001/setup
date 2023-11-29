@@ -335,8 +335,8 @@ function database_menu() {
         echo "Database Menu"
         echo "1. Create Mapchi Database"
         echo "2. Drop Mapchi Database"
-        echo "3. Copy Data to Database"
-        echo "4. Update Database Structure"
+        #echo "3. Copy Data to Database (Caution this will overwrite client data, we will backup the database before data is copied)"
+        echo "3. Update Database Structure"
         echo "x. Back to Menu"
         echo -n "Enter your choice (1, 2, 3, 4, or x): "
         read db_choice
@@ -344,8 +344,8 @@ function database_menu() {
         case $db_choice in
             1) create_database;;
             2) drop_database;;
-            3) copy_data_to_database;;
-            4) create_database_structure;;
+            #3) copy_data_to_database;;
+            3) create_database_structure;;
             x) break;;
             *) echo "Invalid choice. Please try again.";;
         esac
@@ -376,7 +376,12 @@ function drop_database() {
 
 function copy_data_to_database() {
     echo "Copying data to database..."
-    # Add your steps to copy data to a database here
+    
+    # Only if i have to dumb and move data accross
+    cd /webapps/mapchi/environment_3_8_2/mapchecrm_django
+    python manage.py dumpdata > data.json
+    #python manage.py loaddata data.json --settings=mapchecrm_django.settingsprod
+    
     echo "Data copied to database successfully."
 }
 
@@ -401,9 +406,9 @@ while true; do
     echo "Mapchi Services Menu"
     echo "1. New Server"
     echo "2. Upload new Mapchi version"
-    echo "3. Update Server Software Packages"
-    echo "4. Restore Database"
-    echo "5. Database"
+    echo "3. Database"
+    echo "4. Restore Client Data"
+    echo "5. Update Server Software Packages"
     echo "x. Exit"
     echo -n "Enter your choice (1, 2, 3, 4, or x): "
     read choice
@@ -411,9 +416,9 @@ while true; do
     case $choice in
         1) brand_new_server;;
         2) update_code;;
-        3) update_server;;
+        3) database_menu;;
         4) restore_database;;
-        5) database_menu;;
+        5) update_server;;        
         x) exit;;
         *) echo "Invalid choice. Please try again.";;
     esac
