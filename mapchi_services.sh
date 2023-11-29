@@ -113,6 +113,7 @@ function setup_new_server() {
     cd mapchecrm-main
     rm -fr /webapps/mapchi/environment_3_8_2/mapchecrm_django
     mv mapchecrm_django/ /webapps/mapchi/environment_3_8_2/
+    mv /root/setup/db.sqlite3 /webapps/mapchi/environment_3_8_2/mapchecrm_django
     rm -fr mapchecrm-main
 
 
